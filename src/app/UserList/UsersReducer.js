@@ -2,34 +2,26 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = [];
 
-const fetchUserById = createAsyncThunk(
-  'users',
-  async (thunkAPI) => {
-    const response = await fetch()
-    return response.data
-  }
-)
-
-function isFulfilledAction(action) {
+function isFulfilled(action) {
   return action.type.endsWith('fulfilled')
 }
 
 const usersSlice = createSlice({
-  name: 'users',
+  name: 'usersReducer',
   initialState,
   reducers: {
-   
+
   },
   extraReducers: (builder) => {
     builder
       .addMatcher(
-        isFulfilledAction,
-        (state, action) => {}
+        isFulfilled,
+        (state, action) => {
+          action.payload.map(item => state.push(item));
+        }
       )
-      .addDefaultCase((state, action) => {})
   },
-  }
-})
-
+}
+);
 
 export default usersSlice.reducer
