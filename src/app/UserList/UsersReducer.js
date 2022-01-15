@@ -17,7 +17,7 @@ const usersSlice = createSlice({
       .addMatcher(
         isFulfilled,
         (state, action) => {
-          action.payload.map(item => state.push(item));
+          return [...state, ...action.payload];
         }
       )
   },
